@@ -20,16 +20,16 @@ app.post('/api/chat', async (req, res) => {
   }
 
   try {
-    const chatCompletion = await openai.chat.completions.create({
-      messages: [{ role: 'user', content: message }],
+    const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: message }],
     });
 
-    const reply = chatCompletion.choices[0].message.content;
+    const reply = response.choices[0].message.content;
     res.json({ reply });
   } catch (err) {
-    console.error('OpenAI Error:', err);
-    res.status(500).json({ error: 'Frikkie had a brain fart.' });
+    console.error('OpenAI error:', err);
+    res.status(500).json({ error: 'Frikkie had a brain fart 🤯' });
   }
 });
 
